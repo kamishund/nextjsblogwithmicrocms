@@ -1,86 +1,104 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 
-const Home: NextPage = () => {
+import Layout from '../components/Layout';
+import { client } from '../libs/client';
+import type { Cat, Post, Tag } from '../types/blog';
+import Link from 'next/link'
+
+type Props = {
+  posts: Array<Post>;
+  tagall: Tag[];
+  catall:Cat[];
+};
+
+export default function Home({ posts,catall,tagall }: Props) {
+  if (!posts && !catall && !tagall) {
+    return <div>Loading...</div>
+  }
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <>
+    <Layout title='aaa'>
+    <div className='p-5'> 
+      <div className='max-w-5xl mx-auto gap-5 grid md:grid-cols-1 lg:grid-cols-3'>
+        <div className="md:col-span-2 sm:col-span-1 grid md:grid-cols-2 gap-5">
+        {
+                posts.map((post)=>(
+                  <>
+                    <div className="rounded overflow-hidden shadow-lg bg-gray-900">
+                      <Link href="">
+                        <a>
+                          <img className="w-full" src={post.img.url} alt="Sunset in the mountains" />
+                          <div className="px-6 py-4">
+                            <div className="font-bold text-xl mb-2">{post.title}</div>
+                            <p className="text-gray-400 text-base">
+                              #{post.cat.name}
+                            </p>
+                          </div>
+                          <div className="px-6 pb-2">
+                            {
+                              post?.tag.map((tag)=>(
+                                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{tag.tag}</span>
+                              ))
+                            }
+                        </div>
+                        </a>
+                      </Link>
+                    </div>
+                  </>
+                ))
+              }
         </div>
-      </main>
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+        {/* sidebar */}
+        <div className="col-span-1 bg-gray-900 p-4 rounded">
+          <input className="w-full h-8 px-2 text-sm text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline" type="text" placeholder="key words"/>
+          <section className='mt-8'>
+            <h2 className='border-b-2 border-white border-solid pb-2'>カテゴリ一覧</h2>
+            <ul>
+              {
+                 catall.map((cat)=>(
+                  <li className='mt-2'>
+                      <Link href="">
+                          <a>・{cat.name}</a>
+                      </Link>
+                  </li>
+                 ))
+              }
+            </ul>
+          </section>
+
+          <section className='mt-8'>
+            <h2 className='border-b-2 border-white border-solid pb-2'>タグ一覧</h2>
+            <ul>
+              {
+                 tagall.map((cat)=>(
+                  <li className='mt-2'>
+                      <Link href="">
+                          <a>・{cat.tag}</a>
+                      </Link>
+                  </li>
+                 ))
+              }
+            </ul>
+          </section>
+        </div>
+      </div>
     </div>
+    </Layout>
+    </>
   )
 }
 
-export default Home
+export const getServerSideProps = async () => {
+  const data = await client.get({ endpoint: 'posts' });
+  const tagall = await client.get({ endpoint: 'tag' });
+  const catall = await client.get({ endpoint: 'cat' });
+
+  return {
+    props: {
+      posts: data.contents,
+      tagall: tagall.contents,
+      catall: catall.contents,
+    },
+    // revalidate: 3,
+  };
+};

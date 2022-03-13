@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans:wght@400;700&display=swap');
+
+body{
+    font-family: 'Noto Sans JP','Noto Sans', sans-serif;
+    color: #fff;
+    letter-spacing: 0.05em;
+}
+
+header{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+}
+
+main{
+    min-height: 100vh;
+}
