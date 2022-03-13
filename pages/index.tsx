@@ -24,7 +24,7 @@ export default function Home({ posts,catall,tagall }: Props) {
                 posts.map((post)=>(
                   <>
                     <div className="rounded overflow-hidden shadow-lg bg-gray-900">
-                      <Link href="">
+                      <Link href={`/posts/${post.id}`}>
                         <a>
                           <img className="w-full" src={post.img.url} alt="Sunset in the mountains" />
                           <div className="px-6 py-4">
