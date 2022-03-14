@@ -22,3 +22,65 @@ header{
 main{
     min-height: 100vh;
 }
+
+.bodyarea pre{
+    overflow-x: scroll;
+    white-space: pre-wrap ;
+}
+
+.bodyarea code{
+    width: 100%;
+}
+
+.bodyarea *{
+    margin-top: 8px;
+}
+
+
+.bodyarea p{
+   line-height: 1.6;
+}
+
+.bodyarea h1{
+   margin-top: 80px;
+   font-size: 40px;
+   padding: 0.3em 0;/*上下の余白*/
+   border-bottom: solid 3px #fff;/*下線*/
+ }
+
+ .bodyarea h2{
+    margin-top: 80px;
+    font-size: 30px;
+    padding: 0.3em 0;/*上下の余白*/
+    border-bottom: solid 3px #fff;/*下線*/
+  }
+
+  .bodyarea h3{
+    margin-top: 80px;
+    font-size: 24px;
+    padding: 0.3em 0;/*上下の余白*/
+    border-bottom: solid 3px #fff;/*下線*/
+  }
+
+  .bodyarea h4{
+    margin-top: 80px;
+    font-size: 20px;
+    padding: 0.3em 0;/*上下の余白*/
+    border-bottom: solid 3px #fff;/*下線*/
+  }
+
+  .bodyarea h5{
+    margin-top: 80px;
+    font-size: 18px;
+
+    padding: 0.3em 0;/*上下の余白*/
+    border-bottom: solid 3px #fff;/*下線*/
+  }
+
+  .bodyarea img{
+   max-width: 100%;
+  }
+
+  .bodyarea a{
+   color: rgb(41, 155, 255);
+   }
